@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import rubenquadros.com.imageloader.callbacks.Callback
-import java.io.InputStream
 import java.lang.Exception
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
@@ -33,7 +32,7 @@ class BackgroundTask: AsyncTask<String, Void, Bitmap>() {
 
     override fun onPostExecute(result: Bitmap?) {
         super.onPostExecute(result)
-        mListener.TaskOnComplete(bitmap)
+        mListener.taskOnComplete(bitmap)
     }
 
     fun setListener(listener: Callback) {

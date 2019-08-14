@@ -4,5 +4,5 @@ import android.graphics.Bitmap
 
 interface Callback {
 
-    fun TaskOnComplete(bitmap: Bitmap?)
+    fun taskOnComplete(bitmap: Bitmap?)
 }

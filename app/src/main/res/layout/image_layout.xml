@@ -2,7 +2,6 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -10,10 +9,10 @@
 
     <rubenquadros.com.imageloader.custom.ImageLoader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_margin="8dp"
+            app:placeholder="@string/app_logo"
             android:id="@+id/my_image_view"
-            app:placeholder="applogo"
-            android:scaleType="center"/>
+            android:scaleType="fitXY"/>
 
 </RelativeLayout>

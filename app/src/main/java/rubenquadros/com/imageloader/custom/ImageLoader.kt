@@ -7,11 +7,15 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.widget.ImageView
-import rubenquadros.com.imageloader.callbacks.Callback
 import rubenquadros.com.imageloader.R
+import rubenquadros.com.imageloader.callbacks.Callback
 import rubenquadros.com.imageloader.services.BackgroundTask
 
-class ImageLoader(context: Context?) : ImageView(context), Callback {
+class ImageLoader(context: Context?, attrs: AttributeSet?, defStyle: Int) : ImageView(context, attrs, defStyle), Callback {
+
+    init {
+        init(attrs)
+    }
 
     private var mImageURL: String? = null
     private var mPlaceholder: String? = "applogo"
@@ -32,8 +36,12 @@ class ImageLoader(context: Context?) : ImageView(context), Callback {
         }
     private lateinit var backgroundTask: BackgroundTask
 
-    constructor(context: Context?, attrs: AttributeSet?): this(context) {
-        init(attrs)
+    constructor(context: Context?): this(context, null, 0) {
+        ImageView(context)
+    }
+
+    constructor(context: Context?, attrs: AttributeSet?): this(context, attrs, 0) {
+        ImageView(context, attrs)
     }
 
     private fun init(set: AttributeSet?) {
@@ -44,20 +52,7 @@ class ImageLoader(context: Context?) : ImageView(context), Callback {
         mPlaceholder = typedArray.getString(R.styleable.ImageLoader_placeholder)
         mImageURL = typedArray.getString(R.styleable.ImageLoader_imageURL)
         typedArray.recycle()
-//        if(mPlaceholder != null) {
-//            try {
-//                mDrawable = context.resources.getDrawable(
-//                    resources.getIdentifier(
-//                        this.mPlaceholder,
-//                        "drawable",
-//                        context.packageName
-//                    )
-//                )
-//                setImageDrawable(mDrawable)
-//            }catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//        }
+
         try {
             mDrawable = ContextCompat.getDrawable(context, android.R.drawable.progress_indeterminate_horizontal)!!
             setImageDrawable(mDrawable)
@@ -88,7 +83,7 @@ class ImageLoader(context: Context?) : ImageView(context), Callback {
         }
     }
 
-    override fun TaskOnComplete(bitmap: Bitmap?) {
+    override fun taskOnComplete(bitmap: Bitmap?) {
         mBitmap = bitmap
         setupBitmap(mBitmap)
     }
